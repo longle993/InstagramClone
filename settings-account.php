@@ -5,9 +5,9 @@ require_once "core/init.php";
 use classes\{Validation, Hash, Common, Token, Redirect};
 use models\User;
 
-// if(!$user->getPropertyValue("isLoggedIn")) {
-//     Redirect::to("login/login.php");
-// }
+if(!$user->getPropertyValue("isLoggedIn")) {
+    Redirect::to("login/login.php");
+}
 
 $save_success_message = '';
 $save_failure_message = '';

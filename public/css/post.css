@@ -23,7 +23,7 @@
 .post-owner-name {
     display: flex;
     text-decoration: none;
-    color: rgb(102, 250, 102);
+    color: white;
     font-weight: 600;
     font-size: 16px;
     margin-bottom: 4px
@@ -171,7 +171,7 @@
 
 .comment-style:focus {
     background-color: rgb(30, 30, 30);
-    border-color: rgb(102, 250, 102);
+    border-color: rgb(14, 143, 242);
 }
 
 .comment-edit-container, .post-edit-container {
@@ -230,7 +230,7 @@
 .comment-owner {
     text-decoration: none;
     font-weight: 600;
-    color: rgb(56, 245, 56);
+    color: white;
 }
 
 .comment-text {
@@ -385,7 +385,7 @@
 
 .show-comment {
     opacity: 1;
-    color: rgb(102, 250, 102);
+    color: rgb(14, 143, 242);
 
     cursor: pointer;
 }
@@ -467,7 +467,7 @@
 }
 
 .show-again {
-    color: rgb(102, 250, 102);
+    color: rgb(14, 143, 242);
     text-decoration: none;
 }
 

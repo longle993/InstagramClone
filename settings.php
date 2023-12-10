@@ -5,9 +5,9 @@ require_once "core/init.php";
 use classes\{Validation, Common, Session, Token, Redirect, Hash};
 error_reporting();
 
-// if(!$user->getPropertyValue("isLoggedIn")) {
-//     Redirect::to("login/login.php");
-// }
+if(!$user->getPropertyValue("isLoggedIn")) {
+    Redirect::to("login/login.php");
+}
 
 $welcomeMessage = '';
 if(Session::exists("register_success") && $user->getPropertyValue("username") == Session::get("new_username")) {

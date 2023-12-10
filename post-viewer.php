@@ -7,11 +7,13 @@ require_once "core/init.php";
 use classes\{DB, Config, Validation, Common, Session, Token, Hash, Redirect, Cookie};
 use models\{Post, User, Comment, Like};
 use layouts\post\Post as Post_View;
+
 if(!$user->getPropertyValue("isLoggedIn")) {
     Redirect::to("login/login.php");
 }
 
 require_once "functions/sanitize_id.php";
+
 $pid = null;
 if(isset($_GET["pid"])) {
     $pid = sanitize_id($_GET["pid"]);
@@ -20,6 +22,7 @@ if(isset($_GET["pid"])) {
 }
 
 $current_user_id = $user->getPropertyValue("id");
+
 $post = new Post();
 $post->fetchPost($pid);
 $post_owner_id = $post->get_property("post_owner");
@@ -41,14 +44,16 @@ if($post->get_property("post_visibility") == 1) {
 }
 $post_text_data = $post->get_property("text_content");
 
-// Get images
 $poster_image_directory = $post->get_property("picture_media");
 
 $root = Config::get("root/path");
 $project_name = Config::get("root/project_name");
 $project_path = $_SERVER['DOCUMENT_ROOT'] . "/" . $project_name . "/";
+
 $post_images_dir = $project_path . $post->get_property("picture_media");
+
 $post_text_content = htmlspecialchars_decode($post->get_property("text_content"));
+
 $images = "";
 if(is_dir($post_images_dir)) {
     if(is_dir_empty($post_images_dir) == false) {
@@ -60,24 +65,21 @@ if(is_dir($post_images_dir)) {
         $images .= "<input type='hidden' value='0' class='current-asset-image'>";
     }
 }
+
 $post_meta_like = <<<LM
 <div class="no-display post-meta-likes post-meta"><span class="meta-count">0</span>Likes</div>
 LM;
 $post_meta_comment = <<<CM
 <div class="no-display post-meta-comments post-meta"><span class="meta-count">0</span>Comments</div>
 CM;
-$post_meta_share = <<<SM
-<div class="no-display post-meta-shares post-meta"><span class="meta-count">0</span>Shares</div>
-SM;
 
 $ce = $se = "";
 
-// Comment meta
 $pmc = count(Comment::fetch_post_comments($pid));
 if($pmc == 0) {
     $ce = "no-display";
 }
-// Like
+
 $like_manager = new Like();
 $likes_count = count($like_manager->get_post_users_likes_by_post($pid));
 $lk = "like-black-filled.png";
@@ -85,6 +87,7 @@ if($likes_count == 0) {
     $likes_count = "";
     $lk = "like-black.png";
 }
+
 $like_text_state = "Like";
 $like_manager->setData(array(
     "user_id"=>$user->getPropertyValue("id"),
@@ -95,10 +98,13 @@ if($like_manager->exists()) {
     $like_text_state = "Liked";
     $like_image = "like-black-filled.png";
 }
+
 $current_user_picture = $root . (empty($user->getPropertyValue("picture")) ? "public/assets/images/logos/logo512.png" : $user->getPropertyValue("picture"));
+
 function is_dir_empty($dir) {
-    return (count(glob("$dir/*")) === 0); // empty
+    return (count(glob("$dir/*")) === 0); 
 }
+
 function str_replace_first($search, $replace, $subject) {
     $pos = strpos($subject, $search);
     if ($pos !== false) {
@@ -106,6 +112,7 @@ function str_replace_first($search, $replace, $subject) {
     }
     return $subject;
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -113,6 +120,7 @@ function str_replace_first($search, $replace, $subject) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POST</title>
 <link rel="stylesheet" href="public/css/header.css">
 <link rel="stylesheet" href="public/css/global.css">
 <link rel="stylesheet" href="public/css/post.css">
@@ -134,15 +142,17 @@ function str_replace_first($search, $replace, $subject) {
             <div id="asset-wrapper">
                 <img src="" class="asset-image" alt="">
             </div>
+
             <div class="asset-back asset-move-button">
             </div>
+
             <div class="asset-next asset-move-button">
             </div>
+
             <div class="exit-button">
             </div>
         </div>
         <div id="post-info" class="relative">
-            <!-- post owner header -->
             <div class="flex">
                 <div class="flex">
                     <div class="poster-image-container">
@@ -173,7 +183,6 @@ function str_replace_first($search, $replace, $subject) {
                     </div>
                 </div>
             </div>
-            <!-- post text -->
             <div>
                 <div style="margin-top: 8px">
                     <span class="hidden-post-text no-display"><?php echo $post_text_data; ?></span>

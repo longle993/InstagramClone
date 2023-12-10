@@ -38,62 +38,6 @@ class User implements \JsonSerializable {
     public function setPropertyValue($propertyName, $propertyValue) {
         $this->$propertyName = $propertyValue;
     }
-    // public function get_metadata($label="") {
-    //     $metadata = array();
-    //     $values = array($this->id);
-    //     $query = "SELECT * FROM user_metadata WHERE `user_id` = ?";
-    //     if(!empty($label)) {
-    //         $query .= " AND `label` = ?";
-    //         $values[] = $label;
-    //     }
-    //     $this->db->query($query, $values);
-    //     return $this->db->results();
-    // }
-    // public function get_metadata_items_number() {
-    //     $this->db->query("SELECT COUNT(*) as number_of_labels FROM user_metadata WHERE `user_id` = ?", array($this->id));
-    //     if(count($this->db->results()) > 0) {
-    //         return $this->db->results()[0]->number_of_labels;
-    //     }
-    //     return array();
-    // }
-    // public function metadata_exists($label) {
-    //     $this->db->query("SELECT COUNT(*) as number_of_labels FROM user_metadata WHERE `label`=?  AND `user_id`=?", array(
-    //         $label,
-    //         $this->id
-    //     ));
-    //     if($this->db->results()[0]->number_of_labels != 0) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
-    // public function add_metadata($label, $content) {
-    //     if($this->get_metadata_items_number() < 6 && $content != "") {
-    //         $this->db->query("INSERT INTO user_metadata (`label`, `content`, `user_id`) values(?, ?, ?);", array(
-    //             $label,
-    //             $content,
-    //             $this->id
-    //         ));
-    //         return true;
-    //     }
-    //     return false;
-    // }
-    // public function update_metadata($label, $content) {
-    //     $this->db->query("UPDATE user_metadata SET `content`=? WHERE `label`=? AND `user_id`=?", array(
-    //         $content,
-    //         $label,
-    //         $this->id
-    //     ));
-    //     return $this->db->error() == false ? true : false;
-    // }
-    // public function set_metadata($metadata) {
-    //     foreach($metadata as $mdata) {
-    //         if($this->metadata_exists($mdata["label"])) {
-    //             $this->update_metadata($mdata["label"], $mdata["content"]);
-    //         } else {
-    //             $this->add_metadata($mdata["label"], $mdata["content"]);
-    //         }
-    //     }
-    // }
     public static function user_exists($field, $value) {
         DB::getInstance()->query("SELECT * FROM user_info WHERE $field = ?", array($value));
         if(DB::getInstance()->count() > 0) {

@@ -1,18 +1,23 @@
-
 <?php
+
     require_once "vendor/autoload.php";
     require_once "core/init.php";
+
     use classes\{DB, Config, Validation, Common, Session, Token, Hash, Redirect, Cookie};
     use models\{Post, UserRelation, Follow};
     use layouts\post\Post as Post_View;
     use layouts\master_right\Right as MasterRightComponents;
+
     if(!$user->getPropertyValue("isLoggedIn")) {
         Redirect::to("login/login.php");
     }
+
     $welcomeMessage = '';
     if(Session::exists("register_success") && $user->getPropertyValue("username") == Session::get("new_username")) {
         $welcomeMessage = Session::flash("new_username") . ", " . Session::flash("register_success");
     }
+
+
     $current_user_id = $user->getPropertyValue("id");
     $journal_posts = Post::fetch_journal_posts($current_user_id);
     shuffle($journal_posts);

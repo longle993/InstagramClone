@@ -1,0 +1,143 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+html{
+    font-size:62.5%;
+}
+a{
+    text-decoration: none;
+}
+body{
+    color:rgba(38,38,38,1);
+    line-height:18px;
+    font-family:sans-serif;
+}
+.mainPagecontainer{
+    height:100vh;
+    width:100%;
+    background:white;
+    padding:1rem;
+}
+.row{
+    justify-content: center;
+    display: flex;
+    width:100%;
+    max-width:93.5rem;
+    margin:3rem auto 0;
+    align-content: center;
+}
+.col-6{
+    width: 100%;
+    max-width: 35rem;
+    margin-top: 3rem;
+}
+.col-6 form{
+    background:#fff;
+    border: 2px solid #eee;
+    display: flex;
+    flex-direction:column;
+    padding: 2rem 4rem;
+    text-align: center;
+}
+.form--input{
+    padding:0.8rem;
+    margin-bottom: 0.5rem;
+    border: 2px solid #eee;
+    border-radius: 0.4rem;
+}
+.form--input:focus{
+    outline: none;
+    border: 2px solid rgba(168,168,168,1);
+}
+.passWordForm{
+    position: relative;
+}
+.passWordForm input{
+    width: 100%;
+}
+.cursor-pointer{
+    cursor:pointer;
+    
+}
+.show_hide_text{
+   position: absolute;
+    top: 9px;
+    right:4px;
+    font-size: 15px;
+}
+.loGo{
+    width:100%;
+    height: 100%;
+}
+.loGo img{
+    width: 100%;
+    height: 100%;
+}
+form .button{
+    margin: 1rem 0 1.5rem;
+    height: 3rem;
+    border:none;
+    color: #fff;
+    border-radius: 0.4rem;
+    font-weight:bold;
+    background: #5aa8f0;
+}
+form .button:hover{
+    background: #0084ff;
+}
+.seperator{
+    font-size: 1.3rem;
+    color: #999;
+    text-transform:uppercase;
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+.seperator::before,.seperator::after{
+    content: "";
+    position: absolute;
+    background: #eee;
+    width: 40%;
+    height: 1px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.seperator::before{
+    left: 0;
+}
+.seperator::after{
+    right:0;
+}
+.pass_reset{
+    font-size:1.7rem;
+    color: #003569;
+}
+.pass_reset:hover{
+text-decoration: underline;
+}
+.forgot--Footer{
+    text-align: center;
+    font-size: 1.4rem;
+    color: #262626;
+    padding: 2rem 0;
+    background: #fff;
+    border: 2px solid #eee;
+    margin: 1rem 0;
+}
+.forgot--Footer a{
+    color: #3897f0;
+    font-weight: bold;
+    font-size: 1.7rem;
+}
+.forgot--Footer a:hover{
+    text-decoration: underline;
+}
+.form_errors{
+    font-size: 15px;
+    color:#e68183;
+}
+.form_errors li{
+    width: 560px;
+    padding: 4px;
+}
