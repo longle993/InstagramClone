@@ -7,23 +7,19 @@ require_once "core/init.php";
 use classes\{DB, Config, Validation, Common, Session, Token, Hash, Redirect, Cookie};
 use models\{Post, User, Comment, Like};
 use layouts\post\Post as Post_View;
-
 if(!$user->getPropertyValue("isLoggedIn")) {
     Redirect::to("login/login.php");
 }
 
 require_once "functions/sanitize_id.php";
-
 $pid = null;
 if(isset($_GET["pid"])) {
     $pid = sanitize_id($_GET["pid"]);
 } else {
-    // Redirect user to post not found page
     Redirect::to(Config::get("root/path") . "page_parts/errors/404.php");
 }
 
 $current_user_id = $user->getPropertyValue("id");
-
 $post = new Post();
 $post->fetchPost($pid);
 $post_owner_id = $post->get_property("post_owner");
@@ -51,9 +47,7 @@ $poster_image_directory = $post->get_property("picture_media");
 $root = Config::get("root/path");
 $project_name = Config::get("root/project_name");
 $project_path = $_SERVER['DOCUMENT_ROOT'] . "/" . $project_name . "/";
-
 $post_images_dir = $project_path . $post->get_property("picture_media");
-
 $post_text_content = htmlspecialchars_decode($post->get_property("text_content"));
 
 $images = "";
@@ -67,7 +61,6 @@ if(is_dir($post_images_dir)) {
         $images .= "<input type='hidden' value='0' class='current-asset-image'>";
     }
 }
-
 $post_meta_like = <<<LM
 <div class="no-display post-meta-likes post-meta"><span class="meta-count">0</span>Likes</div>
 LM;
@@ -105,19 +98,10 @@ if($like_manager->exists()) {
     $like_text_state = "Liked";
     $like_image = "like-black-filled.png";
 }
-
-// Share
-$shares = Post::get_post_share_numbers($pid);
-if($shares == 0) {
-    $se = "no-display";
-}
-
 $current_user_picture = $root . (empty($user->getPropertyValue("picture")) ? "public/assets/images/logos/logo512.png" : $user->getPropertyValue("picture"));
-
 function is_dir_empty($dir) {
     return (count(glob("$dir/*")) === 0); // empty
 }
-
 function str_replace_first($search, $replace, $subject) {
     $pos = strpos($subject, $search);
     if ($pos !== false) {
@@ -125,18 +109,6 @@ function str_replace_first($search, $replace, $subject) {
     }
     return $subject;
 }
-
-/*if(!is_dir($poster_image_directory)) {
-    exit('Invalid diretory path');
-}
-
-/*$files = array();
-foreach (scandir($directory) as $file) {
-    if ($file !== '.' && $file !== '..') {
-        $files[] = $file;
-    }
-}*/
-
 ?>
 
 <!DOCTYPE html>
@@ -163,7 +135,6 @@ foreach (scandir($directory) as $file) {
     <div class="notification-bottom-container">
         <p class="notification-bottom-sentence">THIS IS TEST</p>
     </div>
-    <?php // Redirect to Post not found page ?>
     <div id="post-viewer" class="post-item">
         <div class="images">
             <?php echo $images; ?>
@@ -172,13 +143,10 @@ foreach (scandir($directory) as $file) {
             <div id="asset-wrapper">
                 <img src="" class="asset-image" alt="">
             </div>
-
             <div class="asset-back asset-move-button">
             </div>
-
             <div class="asset-next asset-move-button">
             </div>
-
             <div class="exit-button">
             </div>
         </div>
@@ -222,7 +190,6 @@ foreach (scandir($directory) as $file) {
                     <div class="collapse-text">See more</div>
                 </div>
             </div>
-            <!-- post reactions number, comments and shares -->
             <div style="margin-top: 14px" class="flex">
                 <div class="pointer list-liked-people row-v-flex">
                     <img src="public/assets/images/icons/like-black.png" class="like-friends-btn reaction-button-image" alt="">
@@ -230,7 +197,6 @@ foreach (scandir($directory) as $file) {
                 </div>
                 <div class="right-pos-margin flex">
                     <div style="margin-right: 6px" class="pointer hover-underline <?php echo $ce ?> noc-container"><span class="num-of-comments regular-text"><?php echo $pmc ?></span>Comments</div>
-                    <div class="pointer hover-underline nos-container <?php echo $se ?>"><span class="num-of-shares regular-text"><?php echo $shares; ?></span>shares</div>
                 </div>
             </div>
             <div class="reaction-box">
@@ -248,14 +214,11 @@ foreach (scandir($directory) as $file) {
                         <a class="regular-text-style-2 bold">Share</a>
                     </div>
                     <div class="share-animation-container flex-row-column">
-                        <div class="share-animation-outer-circle-container">
-                            
+                        <div class="share-animation-outer-circle-container">                           
                         </div>
-                        <div class="share-animation-inner-circle-container">
-                            
+                        <div class="share-animation-inner-circle-container">   
                         </div>
                         <div class="animation-hand">
-
                         </div>
                     </div>
                 </div>
