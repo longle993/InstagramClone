@@ -49,7 +49,6 @@ $project_name = Config::get("root/project_name");
 $project_path = $_SERVER['DOCUMENT_ROOT'] . "/" . $project_name . "/";
 $post_images_dir = $project_path . $post->get_property("picture_media");
 $post_text_content = htmlspecialchars_decode($post->get_property("text_content"));
-
 $images = "";
 if(is_dir($post_images_dir)) {
     if(is_dir_empty($post_images_dir) == false) {
@@ -78,7 +77,6 @@ $pmc = count(Comment::fetch_post_comments($pid));
 if($pmc == 0) {
     $ce = "no-display";
 }
-
 // Like
 $like_manager = new Like();
 $likes_count = count($like_manager->get_post_users_likes_by_post($pid));
@@ -87,7 +85,6 @@ if($likes_count == 0) {
     $likes_count = "";
     $lk = "like-black.png";
 }
-
 $like_text_state = "Like";
 $like_manager->setData(array(
     "user_id"=>$user->getPropertyValue("id"),
@@ -116,8 +113,6 @@ function str_replace_first($search, $replace, $subject) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>V01D47</title>
-<link rel='shortcut icon' type='image/x-icon' href='public/assets/images/favicons/favicon.ico' />
 <link rel="stylesheet" href="public/css/header.css">
 <link rel="stylesheet" href="public/css/global.css">
 <link rel="stylesheet" href="public/css/post.css">
@@ -130,11 +125,7 @@ function str_replace_first($search, $replace, $subject) {
 <script src="public/javascript/global.js" defer></script>
 </head>
 <body>
-<?php include_once "page_parts/basic/header.php"; ?>
 <main>
-    <div class="notification-bottom-container">
-        <p class="notification-bottom-sentence">THIS IS TEST</p>
-    </div>
     <div id="post-viewer" class="post-item">
         <div class="images">
             <?php echo $images; ?>
@@ -208,20 +199,6 @@ function str_replace_first($search, $replace, $subject) {
                     <img src="public/assets/images/icons/black-comment.png" class="reaction-button-image comment-button-image" alt="">
                     <a class="regular-text-style-2 bold">Comment</a>
                 </div>
-                <div class="relative share-button-container">
-                    <div class="pointer row-v-flex reaction-button share">
-                        <img src="public/assets/images/icons/reply-black.png" class="reaction-button-image share-button-image" alt="">
-                        <a class="regular-text-style-2 bold">Share</a>
-                    </div>
-                    <div class="share-animation-container flex-row-column">
-                        <div class="share-animation-outer-circle-container">                           
-                        </div>
-                        <div class="share-animation-inner-circle-container">   
-                        </div>
-                        <div class="animation-hand">
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="comment-section">
                 <div class="comment-block owner_type_section">
@@ -240,7 +217,6 @@ function str_replace_first($search, $replace, $subject) {
                         foreach(Comment::fetch_post_comments($pid) as $comment) {
                             $cm = new Comment();
                             $cm->fetch_comment($comment->id);
-            
                             echo Post_View::generate_comment($cm, $current_user_id);
                         }        
                     ?>
