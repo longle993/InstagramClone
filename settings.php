@@ -146,11 +146,17 @@ function recurse_copy($src,$dst) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit profile</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/css/global.css">
     <link rel="stylesheet" href="public/css/settings.css">
     <link rel="stylesheet" href="public/css/master-left-panel.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- Include Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="public/javascript/config.js" defer></script>
     <script src="public/javascript/settings.js" defer></script>
 </head>
@@ -158,15 +164,15 @@ function recurse_copy($src,$dst) {
 <main>
     <?php include_once "page_parts/basic/master-left.php"; ?>
     <?php require_once "page_parts/settings/left-panel.php" ?>
-    <div id="global-container">
+    <div id="global-container" class="container mt-3">
         <div id="setting-master-container">
             <h1 class="no-margin">Edit profile</h1>
             <div class="setting-block-line-separator"></div>
             <div id="profile-asset-wrapper" class="flex">
-                <a href="<?php echo $profile; ?>" id="assets-wrapper">
+                <a href="<?php echo $profile; ?>" id="assets-wrapper" class="text-decoration-none">
                     <div class="flex padding16">
                         <div id="setting-picture-container" style="margin-right: 10px">
-                            <img src="<?php echo $picture; ?>" alt="avatar" id="setting-picture">
+                            <img src="<?php echo $picture; ?>" alt="avatar" id="setting-picture" class="img-fluid rounded-circle" style="max-width: 100px;">
                         </div>
                         <div>
                             <h3 class="no-margin"><?php echo $fullname; ?></h3>
@@ -183,19 +189,19 @@ function recurse_copy($src,$dst) {
             </div>
             <div class="flex-column">
                 <label for="username" class="setting-label1">Username</label>
-                <input type="text" form="save-form" class="setting-input-text-style" value="<?php echo $username; ?>" name="username" id="username">
+                <input type="text" form="save-form" class="form-control" value="<?php echo $username; ?>" name="username" id="username">
             </div>
             <div class="flex-column">
                 <label for="fullname" class="setting-label1">Nickname</label>
-                <input type="text" form="save-form" class="setting-input-text-style" value="<?php echo $fullname; ?>" name="full-name" id="fullname">
+                <input type="text" form="save-form" class="form-control" value="<?php echo $fullname; ?>" name="full-name" id="fullname">
             </div>
             <div class="flex-column">
                 <label for="bio" class="setting-label1">Add bio</label>
-                <textarea form="save-form" spellcheck="false" name="bio" id="bio" class="setting-input-text-style textarea-style"><?php echo $bio; ?></textarea>
+                <textarea form="save-form" spellcheck="false" name="bio" id="bio" class="form-control textarea-style"><?php echo $bio; ?></textarea>
             </div>    
             <form action="" method="POST" id="save-form" enctype="multipart/form-data">
                 <input type="hidden" name="token_save_changes" value="<?php echo Token::generate("saveEdits"); ?>">
-                <input type="submit" value="Submit" name="save-changes" id="save-button">
+                <input type="submit" value="Submit" name="save-changes" id="save-button" class="btn btn-primary mt-3">
             </form>
         </div>
     </div>
