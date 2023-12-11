@@ -80,22 +80,30 @@ if(isset($_POST["save-changes"])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Edit account</title>
-<link rel="stylesheet" href="public/css/global.css">
-<link rel="stylesheet" href="public/css/settings.css">
-<link rel="stylesheet" href="public/css/master-left-panel.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit account</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Your existing stylesheets -->
+    <link rel="stylesheet" href="public/css/global.css">
+    <link rel="stylesheet" href="public/css/settings.css">
+    <link rel="stylesheet" href="public/css/master-left-panel.css">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="public/javascript/config.js" defer></script>
-<script src="public/javascript/settings.js" defer></script>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- Include Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="public/javascript/config.js" defer></script>
+    <script src="public/javascript/settings.js" defer></script>
 </head>
 <body>
 <main>
     <?php include_once "page_parts/basic/master-left.php"; ?>
     <?php require_once "page_parts/settings/left-panel.php" ?>
-    <div id="global-container">
+    <div id="global-container" class="container mt-3">
         <div id="setting-master-container">
             <h1 class="no-margin">Security</h1>
             <div class="setting-block-line-separator"></div>
@@ -116,26 +124,26 @@ if(isset($_POST["save-changes"])) {
                         }
                     </script>
                 </div>
-                <div class="flex-column">
-                    <label for="email" class="setting-label1">E-mail address<span class="red-label">*</span></label>
-                    <input type="text" form="save-form" class="setting-input-text-style" autocomplete="off" value="<?php echo $email; ?>" name="email" id="email">
+                <div class="form-group">
+                    <label for="email">E-mail address<span class="text-danger">*</span></label>
+                    <input type="text" form="save-form" class="form-control" autocomplete="off" value="<?php echo $email; ?>" name="email" id="email">
                 </div>
-                <div class="flex-column">
-                    <label for="password" class="setting-label1">Current password<span class="red-label">*</span></label>
-                    <input type="password" form="save-form" class="setting-input-text-style" name="password" id="password">
+                <div class="form-group">
+                    <label for="password">Current password<span class="text-danger">*</span></label>
+                    <input type="password" form="save-form" class="form-control" name="password" id="password">
                 </div>
-                <div class="flex-column">
-                    <label for="new-password" class="setting-label1">New password</label>
-                    <input type="password" form="save-form" class="setting-input-text-style" name="new-password" id="new-password">
+                <div class="form-group">
+                    <label for="new-password">New password</label>
+                    <input type="password" form="save-form" class="form-control" name="new-password" id="new-password">
                 </div>
-                <div class="flex-column">
-                    <label for="new-password-again" class="setting-label1">Confirm new password</label>
-                    <input type="password" form="save-form" class="setting-input-text-style" name="new-password-again" id="new-password-again">
+                <div class="form-group">
+                    <label for="new-password-again">Confirm new password</label>
+                    <input type="password" form="save-form" class="form-control" name="new-password-again" id="new-password-again">
                 </div>
                 
                 <form action="" method="POST" id="save-form" enctype="multipart/form-data">
                     <input type="hidden" name="token_save_changes" value="<?php echo Token::generate("saveEdits"); ?>">
-                    <input type="submit" value="Submit" name="save-changes" id="save-button">
+                    <button type="submit" class="btn btn-primary" name="save-changes" id="save-button">Submit</button>
                 </form>
             </div>
         </div>
